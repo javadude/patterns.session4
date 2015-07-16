@@ -6,14 +6,16 @@ import java.awt.event.ActionListener;
 public class WithdrawAction implements ActionListener {
 	private Account account;
 	private int amount;
+	private UndoManager undoManager;
 	
-	public WithdrawAction(Account account, int amount) {
+	public WithdrawAction(UndoManager undoManager, Account account, int amount) {
+		this.undoManager = undoManager;
 		this.account = account;
 		this.amount = amount;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		new WithdrawCommand(account, amount).execute();
+		undoManager.execute(new WithdrawCommand(account, amount));
 	}
 }

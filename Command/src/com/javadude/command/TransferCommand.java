@@ -21,4 +21,25 @@ public class TransferCommand implements Command {
 			// end transaction
 		}
 	}
+
+	@Override
+	public void undo() {
+		try {
+			// start transaction
+			to.withdraw(amount);
+			from.deposit(amount);
+		} finally {
+			// end transaction
+		}
+	}
+
+	@Override
+	public void redo() {
+		execute();
+	}
+
+	@Override
+	public String getName() {
+		return "Transfer " + amount + " from account " + from.getId() + " to account " + to.getId();
+	}
 }

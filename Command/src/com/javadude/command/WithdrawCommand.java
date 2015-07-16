@@ -13,4 +13,19 @@ public class WithdrawCommand implements Command {
 	public void execute() {
 		account.withdraw(amount);
 	}
+
+	@Override
+	public void undo() {
+		account.deposit(amount);
+	}
+
+	@Override
+	public void redo() {
+		execute();
+	}
+
+	@Override
+	public String getName() {
+		return "Withdraw " + amount + " from account " + account.getId();
+	}
 }

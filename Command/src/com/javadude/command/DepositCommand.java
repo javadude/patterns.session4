@@ -13,4 +13,19 @@ public class DepositCommand implements Command {
 	public void execute() {
 		account.deposit(amount);
 	}
+
+	@Override
+	public void undo() {
+		account.withdraw(amount);
+	}
+
+	@Override
+	public void redo() {
+		execute();
+	}
+
+	@Override
+	public String getName() {
+		return "Deposit " + amount + " into account " + account.getId();
+	}
 }

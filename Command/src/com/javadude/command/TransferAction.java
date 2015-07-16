@@ -7,8 +7,10 @@ public class TransferAction implements ActionListener {
 	private Account from;
 	private Account to;
 	private int amount;
+	private UndoManager undoManager;
 
-	public TransferAction(Account from, Account to, int amount) {
+	public TransferAction(UndoManager undoManager, Account from, Account to, int amount) {
+		this.undoManager = undoManager;
 		this.from = from;
 		this.to = to;
 		this.amount = amount;
@@ -16,6 +18,6 @@ public class TransferAction implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		new TransferCommand(from, to, amount).execute();
+		undoManager.execute(new TransferCommand(from, to, amount));
 	}
 }
