@@ -42,4 +42,13 @@ public class TransferCommand implements Command {
 	public String getName() {
 		return "Transfer " + amount + " from account " + from.getId() + " to account " + to.getId();
 	}
+
+	@Override
+	public boolean isCollapsible(Command command) {
+		return false;
+	}
+
+	@Override
+	public void collapse(Command command) {
+	}
 }

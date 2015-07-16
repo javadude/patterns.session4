@@ -34,7 +34,11 @@ public class UndoManager {
 		try {
 			OldState oldState = new OldState();
 			command.execute();
-			undoStack.push(command);
+			if (isUndoAvailable() && undoStack.peek().isCollapsible(command)) {
+				undoStack.peek().collapse(command);
+			} else {
+				undoStack.push(command);
+			}
 			redoStack.clear();
 			fireChanges(oldState);
 		} catch (IllegalStateException e) {

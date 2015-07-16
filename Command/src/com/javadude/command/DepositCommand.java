@@ -28,4 +28,14 @@ public class DepositCommand implements Command {
 	public String getName() {
 		return "Deposit " + amount + " into account " + account.getId();
 	}
+
+	@Override
+	public boolean isCollapsible(Command command) {
+		return command.getClass() == DepositCommand.class;
+	}
+
+	@Override
+	public void collapse(Command command) {
+		amount += ((DepositCommand)command).amount;
+	}
 }

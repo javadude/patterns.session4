@@ -23,6 +23,7 @@ public class BankUI extends JFrame {
 			add(new AccountUI(account1));
 			add(new AccountUI(account2));
 		}});
+		add(BorderLayout.CENTER, new JButton(new SampleAction()));
 		add(BorderLayout.SOUTH, new JPanel(new GridLayout(0, 1, 5, 5)) {{
 			add(new MyButton("Deposit $10 to account 1", new DepositAction(undoManager, account1, 10)));
 			add(new MyButton("Deposit $10 to account 2", new DepositAction(undoManager, account2, 10)));

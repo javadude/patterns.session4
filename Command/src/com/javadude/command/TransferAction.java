@@ -18,6 +18,12 @@ public class TransferAction implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		undoManager.execute(new TransferCommand(from, to, amount));
+		CompositeCommand command = new CompositeCommand("Transfer " + amount + " from " + from.getId() + " to " + to.getId(), 
+				new WithdrawCommand(from, amount),
+				new DepositCommand(to, amount)
+				);
+		
+		undoManager.execute(command);
+//		undoManager.execute(new TransferCommand(from, to, amount));
 	}
 }

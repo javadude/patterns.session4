@@ -28,4 +28,14 @@ public class WithdrawCommand implements Command {
 	public String getName() {
 		return "Withdraw " + amount + " from account " + account.getId();
 	}
+	
+	@Override
+	public boolean isCollapsible(Command command) {
+		return command.getClass() == WithdrawCommand.class;
+	}
+
+	@Override
+	public void collapse(Command command) {
+		amount += ((WithdrawCommand)command).amount;
+	}
 }
