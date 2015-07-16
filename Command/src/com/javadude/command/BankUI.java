@@ -13,6 +13,7 @@ import javax.swing.WindowConstants;
 public class BankUI extends JFrame {
 	private Account account1 = new Account(1);
 	private Account account2 = new Account(2);
+	private TransferMacro transferMacro = new TransferMacro();
 	
 	public BankUI() {
 		setLayout(new BorderLayout());
@@ -25,6 +26,8 @@ public class BankUI extends JFrame {
 			add(new MyButton("Deposit $10 to account 2", e -> {account2.deposit(10);}));
 			add(new MyButton("Withdraw $10 from account 1", e -> {account1.withdraw(10);}));
 			add(new MyButton("Withdraw $10 from account 2", e -> {account2.withdraw(10);}));
+			add(new MyButton("Transfer $10 from account 1 to account 2", e -> {transferMacro.doTransfer(account1, account2, 10);}));
+			add(new MyButton("Transfer $10 from account 2 to account 1", e -> {transferMacro.doTransfer(account2, account1, 10);}));
 		}});
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		pack();
